@@ -7,7 +7,7 @@ import tkinter as tk
 from tkinter import messagebox
 
 
-initial_adult_ones = [
+initial_blocked_ones = [
 # add here your initial websites
 ]
 
@@ -26,8 +26,10 @@ def add_to_hosts(address, ip_address="192.168.1.1" , initial=False):
         hostname = parsed_url.hostname
     elif is_valid_hostname(address):
         hostname = address
-    elif not initial :
-        messagebox.showerror("Error", "Bad input. Please enter a valid URL or hostname.")
+    else:
+        if not initial:
+            messagebox.showerror(
+                "Error", "Bad input. Please enter a valid URL or hostname.")
         return
 
     hosts_path = ""
@@ -57,7 +59,8 @@ def add_to_hosts(address, ip_address="192.168.1.1" , initial=False):
     if not initial :
         messagebox.showinfo("Success",  f"{hostname} has been blocked successfully.")
 
-for web in initial_adult_ones : 
+
+for web in initial_blocked_ones:
     add_to_hosts(web , initial=True)
 
 def on_submit():
